@@ -5,41 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PersonalFinanceApp</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/myStyle.css" />
+    @RenderBody()
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">PersonalFinanceApp</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div id="nav-bar">
+        <img class="firstIcon" src="~/lib/images/icon.png" />
+        <p>PersonalFinanceApp</p>
+        <h6>Izbornik</h6>
+        <hr />
+        <div class="firstPartNavbar">
+            <ul>
+
+                <li><a href="#"><img src="~/lib/images/pregled.png" alt="Pregled" />Pregled</a></li>
+                <li><a href="#"><img src="~/lib/images/card.png" alt="Pregled" />Card</a></li>
+                <li><a href="#"><img src="~/lib/images/plaćanje.png" alt="Pregled" />Plaćanje</a></li>
+                <li><a href="#"><img src="~/lib/images/statistika.png" alt="Pregled" />Statistika</a></li>
+                <li><a href="#"><img src="~/lib/images/izvješće.png" alt="Pregled" />Izvješće</a></li>
+                <li><a href="#"><img src="~/lib/images/proračun.png" alt="Pregled" />Proračun</a></li>
+                <li><a href="#"><img src="~/lib/images/račun.png" alt="Pregled" />Račun</a></li>
+            </ul>
+        </div>
+
+        <h6>Kategorije</h6>
+        <hr />
+        <div class="kategorija">
+            <ul>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Prihod</a></li>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Dugovi</a></li>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Računi</a></li>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Ulaganja</a></li>
+            </ul>
+        </div>
+        <div class="postavke">
+            <ul>
+                <li><a href="#"><img src="~/lib/images/postavke.png" alt="Pregled" />Postavke</a></li>
+                <li><a href="#"><img src="~/lib/images/info.png" alt="Pregled" />Informacije</a></li>
+            </ul>
+        </div>
+        <hr />
+        <a class="odjava" href="#"><img src="~/lib/images/odjava.png" alt="Pregled" />Odjava</a>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - PersonalFinanceApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <div id="main-div">
+        <div>
+            <div id="sticky-bar">
+                <div class="search-bar">
+                    <img class="firstIcon" src="~/lib/images/search.png" />
+                    <input type="text" id="search-input" placeholder="Search...">
+                </div>
+                <div id="image-container">
+                    <img id="image" src="~/lib/images/profilna.png" alt="Sample Image">
+                    <div id="text-container">
+                        <p id="text">Eugen Deur <br />Special Member</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
+        <hr />
+        <div id="main-div">
+            <div id="main-content">
+                
+            </div>
+        </div>
+
+    </div>
+    
+
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
