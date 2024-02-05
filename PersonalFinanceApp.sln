@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33027.164
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceApp", "PersonalFinanceApp\PersonalFinanceApp.csproj", "{A2AC8A57-AA7A-454E-BF17-D9EDC81C622F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFinanceApp", "PersonalFinanceApp\PersonalFinanceApp.csproj", "{A2AC8A57-AA7A-454E-BF17-D9EDC81C622F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceAppMVC", "PersonalFinanceAppMVC\PersonalFinanceAppMVC.csproj", "{D50E97C8-0F62-43C6-8B4C-61A753D75745}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A2AC8A57-AA7A-454E-BF17-D9EDC81C622F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2AC8A57-AA7A-454E-BF17-D9EDC81C622F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2AC8A57-AA7A-454E-BF17-D9EDC81C622F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D50E97C8-0F62-43C6-8B4C-61A753D75745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50E97C8-0F62-43C6-8B4C-61A753D75745}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50E97C8-0F62-43C6-8B4C-61A753D75745}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D50E97C8-0F62-43C6-8B4C-61A753D75745}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
