@@ -11,46 +11,65 @@
 </head>
 <body>
     <div id="nav-bar">
-        <img class="firstIcon" src="~/lib/images/icon.png" />
-        <p>PersonalFinanceApp</p>
-        <h6>Izbornik</h6>
-        <hr />
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <p class="first text"><img class="firstIcon" src="~/lib/images/icon.png" />PersonalFinanceApp</p>
+        <h6>Izbornik <hr/></h6>
         <div class="firstPartNavbar">
-            <ul>
+            <ul class="navbar-nav">
 
-                <li><a href="#"><img src="~/lib/images/pregled.png" alt="Pregled" />Pregled</a></li>
-                <li><a href="Tomo.cshtml"><img src="~/lib/images/card.png" alt="Pregled" />Card</a></li>
-                <li><a href="#"><img src="~/lib/images/plaćanje.png" alt="Pregled" />Plaćanje</a></li>
-                <li><a href="#"><img src="~/lib/images/statistika.png" alt="Pregled" />Statistika</a></li>
-                <li><a href="#"><img src="~/lib/images/izvješće.png" alt="Pregled" />Izvješće</a></li>
-                <li><a href="#"><img src="~/lib/images/proračun.png" alt="Pregled" />Proračun</a></li>
-                <li><a href="#"><img src="~/lib/images/račun.png" alt="Pregled" />Račun</a></li>
+                <li class ="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Home")"><img src="~/lib/images/pregled.png" alt="Pregled" />Pregled</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Card", "Home")"><img src="~/lib/images/card.png" alt="Pregled" />Card</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Placanje", "Home")"><img src="~/lib/images/plaćanje.png" alt="Pregled" />Plaćanje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Statistika", "Home")"><img src="~/lib/images/statistika.png" alt="Pregled" />Statistika</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Izvjesce", "Home")"><img src="~/lib/images/izvješće.png" alt="Pregled" />Izvješće</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Proracun", "Home")"><img src="~/lib/images/proračun.png" alt="Pregled" />Proračun</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Racun", "Home")"><img src="~/lib/images/račun.png" alt="Pregled" />Račun</a>
+                </li>
             </ul>
         </div>
 
-        <h6>Kategorije</h6>
-        <hr />
-        <div class="kategorija">
+        <h6>Kategorije <hr /> </h6>
+       
+        <div class="Kategorija">
             <ul>
-                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Prihod</a></li>
-                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Dugovi</a></li>
-                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Računi</a></li>
-                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Ulaganja</a></li>
+                <li class ="nav-item">
+                    <a class="nav-link" href="@Url.Action("Prihod", "Home")"><img src="~/lib/images/krug.png" alt="Pregled" />Prihod</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Dugovi", "Home")"><img src="~/lib/images/krug.png" alt="Pregled" />Dugovi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Racuni", "Home")"><img src="~/lib/images/krug.png" alt="Pregled" />Računi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Ulaganja", "Home")"><img src="~/lib/images/krug.png" alt="Pregled" />Ulaganja</a>
+                </li>
             </ul>
         </div>
         <div class="postavke">
             <ul>
-                <li><a href="#"><img src="~/lib/images/postavke.png" alt="Pregled" />Postavke</a></li>
-                <li><a href="#"><img src="~/lib/images/info.png" alt="Pregled" />Informacije</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Postavke", "Home")"><img src="~/lib/images/postavke.png" alt="Pregled" />Postavke</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Info", "Home")"><img src="~/lib/images/info.png" alt="Pregled" />Informacije</a>
+                </li>
             </ul>
         </div>
-        <hr />
         <a class="odjava" href="#"><img src="~/lib/images/odjava.png" alt="Pregled" />Odjava</a>
     </div>
-
     <div id="main-div">
         <div id="sticky-bar">
             <div class="search-bar">
@@ -65,6 +84,7 @@
             <img id="image" src="~/lib/images/profilna.png" alt="Sample Image">
             <p id="text">Eugen Deur <br />Special Member</p>
         </div>
+    </div>
     </div>
     <hr/>
     <div id="main-div">
