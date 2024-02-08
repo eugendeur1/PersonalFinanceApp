@@ -25,19 +25,12 @@ namespace PersonalFinanceAppMVC.Controllers
             return View();
         }
 
-        public IActionResult Tomo(int showReportForMonth)
+        public IActionResult Tomo() { 
+            return View();
+        }
+        public IActionResult Card()
         {
-            var monthText = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(showReportForMonth);
-            Console.WriteLine(monthText);
-            ViewBag.ImeReporta = monthText;
-
-            int[] poljeBrojevaZaTjedan = { 1, 22, 3, 44, 5, 66, 7 };
-            ViewBag.PoljeBrojeva = poljeBrojevaZaTjedan;
-            return View("Tomo");
-            //if (allow)
-            //    return View("Tomo");
-            //else
-            //    return RedirectToAction("Privacy");
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

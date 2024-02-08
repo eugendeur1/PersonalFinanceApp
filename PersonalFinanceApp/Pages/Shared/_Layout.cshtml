@@ -48,34 +48,25 @@
     </div>
 
     <div id="main-div">
-            <div id="sticky-bar">
-                <div class="search-bar">
-                    <from action="">
-                        <img class="secondIcon" src="~/lib/images/search.png" />
-                        <input type="text" id="search-input" placeholder="Search...">
-                        
-                    </from>
-                </div>
-            </div>
-            <div class="image-container">
-                <img id="image" src="~/lib/images/profilna.png" alt="Sample Image">
-                    <p id="text">Eugen Deur <br />Special Member</p>
-                </div>
-            </div>
-        
-        <div id="main-div">
-            <div id="main-content">
+        <div id="sticky-bar">
+            <div class="search-bar">
+                <from action="">
+                    <img class="secondIcon" src="~/lib/images/search.png" />
+                    <input type="text" id="search-input" placeholder="Search...">
 
+                </from>
             </div>
         </div>
-
+        <div class="image-container">
+            <img id="image" src="~/lib/images/profilna.png" alt="Sample Image">
+            <p id="text">Eugen Deur <br />Special Member</p>
+        </div>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <hr />
+    <div id="main-div">
+        <div id="main-content">
+        </div>
+    </div>
     @RenderBody()
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
-<div id="image-container">

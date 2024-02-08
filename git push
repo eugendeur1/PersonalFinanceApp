@@ -1,0 +1,23 @@
+[33mcommit 4daae7e48c9a62c2db4a6c238e0ea94321a9c6dc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: Eugen Deur <eugendeur556@gmail.com>
+Date:   Fri Feb 2 23:42:52 2024 +0100
+
+    Prepravljen je prvi dio HTML-a
+
+[33mcommit 088f95a922256219be2287563cf8f937a5a1c976[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Eugen Deur <eugendeur556@gmail.com>
+Date:   Fri Feb 2 13:54:13 2024 +0100
+
+    First Part HTML and CSS
+
+[33mcommit b3627aaffcacbc1816787e40192d0f12b12a6ba4[m
+Author: Eugen Deur <eugendeur556@gmail.com>
+Date:   Thu Jan 25 18:24:33 2024 +0100
+
+    Add project files.
+
+[33mcommit 6a503cf17bcc6f99a79c0ec4dd6e397e5345f832[m
+Author: Eugen Deur <eugendeur556@gmail.com>
+Date:   Thu Jan 25 18:24:30 2024 +0100
+
+    Add .gitignore and .gitattributes.

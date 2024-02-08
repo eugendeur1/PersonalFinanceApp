@@ -1,16 +1,10 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-
-﻿
-* {
-    margin: 0;
-    padding: 0;
+﻿body {
+    margin:0;
+    padding:0;
 }
-
 .firstIcon {
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     top: 4%;
     left: 10%;
 }
@@ -22,22 +16,23 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 .kategorija img {
-    width: 0px;
-    height: 0px;
+    width: 30px;
+    height: 30px;
     margin-right: 15px;
 }
-.postavke img{
-    width:30px;
-    height:30px;
+
+.postavke img {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
 }
+
+
 #nav-bar {
     background-color: lightgrey;
-    width: 330px;
+    width: 300px;
     float: left;
     padding: 10px;
-    margin-left:15px;
-    margin-top:15px;
-    border-radius:8px;
 }
 
     #nav-bar p {
@@ -82,9 +77,9 @@ for details on configuring this project to bundle and minify static web assets. 
     margin-left: 8px;
 }
 
-.odjava img {
-        width: 30px;
-        height: 30px;
+    .odjava img {
+        width: 20px;
+        height: 20px;
         margin-right: 14px;
     }
 
@@ -97,6 +92,7 @@ for details on configuring this project to bundle and minify static web assets. 
     display: flex;
     align-items: center;
     padding: 10px;
+    flex-wrap:wrap;
 }
 
 .secondIcon {
@@ -113,7 +109,6 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .search-bar {
     flex: 1;
-    flex-wrap:wrap;
     width: 350px;
     height: 55px;
     padding-top: 15px;
@@ -123,7 +118,8 @@ for details on configuring this project to bundle and minify static web assets. 
 #search-input {
     border: none;
 }
-#search-input:after {
+
+    #search-input:after {
         border: none;
     }
 
@@ -143,10 +139,15 @@ from {
     float: left;
     margin-right: 10px;
 }
-
-hr{
-    color:black;
+#main-div {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:center;
 }
+
+
+
 
 
 

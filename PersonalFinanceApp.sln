@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFinanceApp", "PersonalFinanceApp\PersonalFinanceApp.csproj", "{A2AC8A57-AA7A-454E-BF17-D9EDC81C622F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinanceAppMVC", "PersonalFinanceAppMVC\PersonalFinanceAppMVC.csproj", "{D50E97C8-0F62-43C6-8B4C-61A753D75745}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonalFinanceAppMVC", "PersonalFinanceAppMVC\PersonalFinanceAppMVC.csproj", "{D50E97C8-0F62-43C6-8B4C-61A753D75745}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

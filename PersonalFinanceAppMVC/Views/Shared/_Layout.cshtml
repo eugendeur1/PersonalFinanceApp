@@ -7,40 +7,77 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PersonalFinanceAppMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/myStyle.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PersonalFinanceAppMVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div id="nav-bar">
+        <img class="firstIcon" src="~/lib/images/icon.png" />
+        <p>PersonalFinanceApp</p>
+        <h6>Izbornik</h6>
+        <hr />
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="firstPartNavbar">
+            <ul>
+
+                <li><a href="#"><img src="~/lib/images/pregled.png" alt="Pregled" />Pregled</a></li>
+                <li><a href="Tomo.cshtml"><img src="~/lib/images/card.png" alt="Pregled" />Card</a></li>
+                <li><a href="#"><img src="~/lib/images/plaćanje.png" alt="Pregled" />Plaćanje</a></li>
+                <li><a href="#"><img src="~/lib/images/statistika.png" alt="Pregled" />Statistika</a></li>
+                <li><a href="#"><img src="~/lib/images/izvješće.png" alt="Pregled" />Izvješće</a></li>
+                <li><a href="#"><img src="~/lib/images/proračun.png" alt="Pregled" />Proračun</a></li>
+                <li><a href="#"><img src="~/lib/images/račun.png" alt="Pregled" />Račun</a></li>
+            </ul>
+        </div>
+
+        <h6>Kategorije</h6>
+        <hr />
+        <div class="kategorija">
+            <ul>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Prihod</a></li>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Dugovi</a></li>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Računi</a></li>
+                <li><a href="#"><img src="~/lib/images/krug.png" alt="Pregled" />Ulaganja</a></li>
+            </ul>
+        </div>
+        <div class="postavke">
+            <ul>
+                <li><a href="#"><img src="~/lib/images/postavke.png" alt="Pregled" />Postavke</a></li>
+                <li><a href="#"><img src="~/lib/images/info.png" alt="Pregled" />Informacije</a></li>
+            </ul>
+        </div>
+        <hr />
+        <a class="odjava" href="#"><img src="~/lib/images/odjava.png" alt="Pregled" />Odjava</a>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - PersonalFinanceAppMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <div id="main-div">
+        <div id="sticky-bar">
+            <div class="search-bar">
+                <from action="">
+                    <img class="secondIcon" src="~/lib/images/search.png" />
+                    <input type="text" id="search-input" placeholder="Search...">
+
+                </from>
+            </div>
         </div>
-    </footer>
+        <div class="image-container">
+            <img id="image" src="~/lib/images/profilna.png" alt="Sample Image">
+            <p id="text">Eugen Deur <br />Special Member</p>
+        </div>
+    </div>
+    <hr/>
+    <div id="main-div">
+        <div id="main-content">
+            <h1>Pregled</h1>
+            
+        </div>
+    </div>
+
+    
+    
+   
+    @RenderBody()
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
