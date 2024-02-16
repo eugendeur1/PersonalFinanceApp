@@ -1,8 +1,214 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plaćanje</title>
+    <style>
+        
+        table {
+            margin:auto;
+           text-align:center;
+            border-collapse: collapse;
+            width: 70%;        }
+        
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
 
+        th {
+            background-color: #f2f2f2;
+        }
 
-<div class="text-center">
-    <p>Plaćanje</p>
-</div>
+        tfoot td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <table id="transactionTable">
+        <thead>
+            <tr>
+                <th>Identifikator transakcije (Trx Id)</th>
+                <th>Vrijeme transakcije</th>
+                <th>Tip transakcije</th>
+                <th>Iznos transakcije</th>
+                <th>Lokacija</th>
+                <th>Način plaćanja</th>
+                <th>Opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Negative transactions -->
+            <tr>
+                <td>1</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+                <tr>
+                    <td>7</td>
+                    <td>2024-01-01 10:00</td>
+                    <td>Isplata na bankomatu</td>
+                    <td>-100.00</td>
+                    <td>Bankomat XYZ</td>
+                    <td>Gotovina</td>
+                    <td>Isplata mjesečnih troškova</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>2024-01-01 10:00</td>
+                    <td>Isplata na bankomatu</td>
+                    <td>-100.00</td>
+                    <td>Bankomat XYZ</td>
+                    <td>Gotovina</td>
+                    <td>Isplata mjesečnih troškova</td>
+                </tr>
+            <tr>
+                <td>9</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-1000.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+           
+            <tr>
+                <td>12</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>2024-01-01 10:00</td>
+                <td>Isplata na bankomatu</td>
+                <td>-100.00</td>
+                <td>Bankomat XYZ</td>
+                <td>Gotovina</td>
+                <td>Isplata mjesečnih troškova</td>
+            </tr>
+            <!-- More negative transactions -->
+            <!-- Positive transactions -->
+            <tr>
+                <td>15</td>
+                <td>2024-01-05 15:30</td>
+                <td>Online kupovina</td>
+                <td>50.00</td>
+                <td>Webshop ABC</td>
+                <td>Kartično plaćanje</td>
+                <td>Kupnja knjige</td>
+            </tr>
+            <!-- More positive transactions -->
+        </tbody>
+        <tfoot>
+            <tr>
+        <td colspan="3">COUNT</td>
+        <td id="totalAmount">0</td>
+        <td colspan="3">SUM: <span id="totalCount">0</span></td>
+        </tr>
+        </tfoot>
+    </table>
+    <script>
+        
+        var tbody = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
+
+        // Count the number of rows (transactions)
+        var rowCount = tbody.getElementsByTagName('tr').length;
+
+        // Calculate the sum of transaction amounts
+        var totalAmount = 0;
+        var rows = tbody.getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            var amountCell = rows[i].getElementsByTagName('td')[3]; 
+            totalAmount += parseFloat(amountCell.textContent);
+        }
+
+        
+        document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        document.getElementById('totalCount').textContent = rowCount;
+    </script>
+</body>
+</html>

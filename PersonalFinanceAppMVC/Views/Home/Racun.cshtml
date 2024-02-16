@@ -1,6 +1,126 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-<div class="text-center">
-    <p>Račun</p>
-</div>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: black; /* Highlight color */
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Profil</h2>
+        <form action="#">
+            <div class="form-group">
+                <label for="ime_prezime">Ime prezime:</label>
+                <input type="text" id="ime_prezime" name="ime_prezime">
+            </div>
+            <div class="form-group">
+                <label for="email">Email adresa:</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="telefon">Broj telefona:</label>
+                <input type="text" id="telefon" name="telefon">
+            </div>
+            <!-- Lokacija -->
+            <div class="form-group">
+                <label for="lokacija">Lokacija:</label>
+                <select id="lokacija" name="lokacija">
+                    <!-- Country options will be dynamically generated here -->
+                </select>
+            </div>
+            <!-- Jezik -->
+            <div class="form-group">
+                <label for="jezik">Jezik:</label>
+                <select id="jezik" name="jezik">
+                    <!-- Language options will be dynamically generated here -->
+                </select>
+            </div>
+            <button type="submit">Spremi</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to add country options
+        function addCountryOptions() {
+            var select = document.getElementById('lokacija');
+            fetch('https://restcountries.com/v3.1/all')
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(country => {
+                        var option = document.createElement('option');
+                        option.value = country.name.common;
+                        option.textContent = country.name.common;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching countries:', error));
+        }
+
+        // Function to add language options
+        function addLanguageOptions() {
+            var select = document.getElementById('jezik');
+            fetch('https://restcountries.com/v3.1/all')
+                .then(response => response.json())
+                .then(data => {
+                    var languages = new Set();
+                    data.forEach(country => {
+                        if (country.languages) {
+                            Object.values(country.languages).forEach(language => {
+                                languages.add(language);
+                            });
+                        }
+                    });
+                    languages.forEach(language => {
+                        var option = document.createElement('option');
+                        option.value = language;
+                        option.textContent = language;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching languages:', error));
+        }
+
+        // Call the functions to add options when the page loads
+        window.onload = function () {
+            addCountryOptions();
+            addLanguageOptions();
+        };
+    </script>
+
+</body>
+</html>
