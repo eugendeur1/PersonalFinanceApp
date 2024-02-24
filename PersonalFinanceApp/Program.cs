@@ -14,6 +14,7 @@ namespace PersonalFinanceApp
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //comment
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
