@@ -1,4 +1,6 @@
-﻿ <!DOCTYPE html>
+﻿@using System.Globalization
+@model List<MyCard>
+ <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -66,20 +68,24 @@
     <body>
     <h2>Kartice</h2>
         <div class="flex-container">
-
-        <div class="card">
+        
+        @foreach (var card in Model)
+        {
+            <div class="card">
                 <img class="logo" src="~/lib/images/icon.png" />
-                <h2>Eugen Deur</h2>
+                <h2>@card.FullName</h2>
                 <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
                 <p class="card-date">Datum: 05/2029</p>
               
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
             </div>
-        <div class="card">
+        }
+        
+        @* <div class="card">
             <img class="logo" src="~/lib/images/icon.png" />
-            <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
-            <p class="card-date">Datum: 09/2028</p>
+            <h2>@Model[1].FullName</h2>
+            <p class="card-number">Broj kartice: @Model[1].CardNumber</p>
+            <p class="card-date">Datum: @Model[1].ExpirationDate.ToString("MM/yyyy", CultureInfo.InvariantCulture)</p>
 
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
         </div>
@@ -90,15 +96,15 @@
             <p class="card-date">Datum: 01/2030</p>
 
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
-        </div>
-        <div class="card">
+        </div> *@
+        @* <div class="card">
             <img class="logo" src="~/lib/images/icon.png" />
-            <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
+            <h2>@Model[3].FullName</h2>
+            <p class="card-number">Broj kartice: @Model[3].CardNumber</p>
             <p class="card-date">Datum: 07/2027</p>
 
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
-        </div>
+        </div> *@
         </div>
     </body>
 </html>

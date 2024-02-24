@@ -31,7 +31,38 @@ namespace PersonalFinanceAppMVC.Controllers
 
         public IActionResult Card()
         {
-            return View();
+            var myListOfCards = new List<MyCard>();
+
+            var brownCard = new MyCard()
+            {
+                CardNumber = 1234567890,
+                FullName = "Eugen Deur",
+                ExpirationDate = DateTime.Parse("2024-02-23")
+            };
+            var redCard = new MyCard()
+            {
+                CardNumber = 1234567891,
+                FullName = "Tomislav Tolj 2",
+                ExpirationDate = DateTime.Parse("2024-04-23")
+            };
+            var greenCard = new MyCard()
+            {
+                CardNumber = 1234567892,
+                FullName = "Luka Modriæ",
+                ExpirationDate = DateTime.Parse("2024-05-23")
+            };
+            var whiteCard = new MyCard()
+            {
+                CardNumber = 1234567893,
+                FullName = "Albert Einstein",
+                ExpirationDate = DateTime.Parse("2024-06-23")
+            };
+            myListOfCards.Add(brownCard);
+            myListOfCards.Add(redCard);
+            myListOfCards.Add(greenCard);
+            myListOfCards.Add(whiteCard);
+
+            return View(myListOfCards);
         }
         public IActionResult Placanje()
         {
