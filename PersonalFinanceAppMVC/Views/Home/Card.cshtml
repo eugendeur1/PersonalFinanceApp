@@ -1,44 +1,46 @@
-﻿@model modelCard
-
-
+﻿@using System.Globalization
+@model List<MyCard>
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            h1{
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h3 {
             margin: auto;
             text-align: center;
-            }
+        }
+
         .flex-container {
             display: flex;
-            flex-wrap:wrap;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-top:20px;
+            
+            gap: 20px;
+        }
+
+        .card {
+            width: 300px;
+            height: 200px;
+            border-radius: 20px;
+            background-color: greenyellow;
+            position: relative;
+            box-shadow: 8px 8px 12px rgba(0,0,0,0.3);
+        }
+
+        .card-content {
             padding: 20px;
         }
-            .card {
-                width: 300px;
-                height: 200px;
-                border-radius: 20px;
-                background-color: greenyellow;
-                position: relative;
-            box-shadow: 8px 8px 12px rgba(0,0,0,0.3);
-            }
 
-            .card-content {
-                padding: 20px;
-            }
-
-            .logo {
+        .logo {
             position: absolute;
             top: 10px;
             left: 240px;
             width: 30px;
             height: 30px;
-            display:inline;
-            }
+            display: inline;
+        }
 
         .card h2 {
             padding-left: 5px;
@@ -48,66 +50,86 @@
             margin-bottom: 20px;
         }
 
-            .card-number, .card-date  {
+        .card-number, .card-date {
             padding-left: 5px;
-                text-align:left;
-            }
+            text-align: left;
+        }
 
-            .visa-logo {
-           
-                position: absolute;
-                bottom: 10px;
-                right: 10px;
-                width: 60px;
-                height: 30px;
-            }
-            .card:first-child{  background-color:bisque; }
-            .card:last-child{background-color:white;}
-            .card:nth-child(2){background-color:red;}
-                </style>
-    </head>
-    <body>
-    <h1>Kartice</h1>
-        <div class="flex-container">
-        @foreach (var number in Model.CardNumbers)
-        {
-        <div class="card">
-                    <img class="logo" src="~/lib/images/icon.png" />
-                    <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: @number </p>
-                    <p class="card-date">Datum: 05/2029</p>
+        .visa-logo {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            height: 30px;
+        }
 
-                    <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
-                </div>
+        .card:first-child {
+            background-color: bisque;
+        }
+
+        .card:last-child {
+            background-color: white;
+        }
+
+        .card:nth-child(2) {
+            background-color: red;
+        }
+        .master-logo{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 80px;
+            height: 50px;
         }
         
-        <div class="card">
-            <img class="logo" src="~/lib/images/icon.png" />
-            <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: xxxx xxxx xxxx xxxx</p>
-            <p class="card-date">Datum: 09/2028</p>
+    </style>
+</head>
+<body>
+    <h3>Kartice</h3>
+    <div class="flex-container">
 
-            <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
+        @foreach (var card in Model)
+        {
+            <div class="card">
+                <img class="logo" src="~/lib/images/icon.png" />
+                <h2>@card.FullName</h2>
+                <p class="card-number">Broj kartice: @card.CardNumber</p>
+                <p class="card-date">Datum: @card.ExpirationDate.ToString("MM/yyyy", CultureInfo.InvariantCulture)</p>
+                @if (card.Visa)
+                {
+                    <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
+                }
+                else
+                {
+                    <img class="master-logo" src="~/lib/images/Master_Card.png" />
+                }
+            </div>
+        }
+
+        @* <div class="card">
+        <img class="logo" src="~/lib/images/icon.png" />
+        <h2>@Model[1].FullName</h2>
+        <p class="card-number">Broj kartice: @Model[1].CardNumber</p>
+        <p class="card-date">Datum: @Model[1].ExpirationDate.ToString("MM/yyyy", CultureInfo.InvariantCulture)</p>
+
+        <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
         </div>
         <div class="card">
-            <img class="logo" src="~/lib/images/icon.png" />
-            <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice:  xxxx xxxx xxxx xxxx</p>
-            <p class="card-date">Datum: 01/2030</p>
+        <img class="logo" src="~/lib/images/icon.png" />
+        <h2>Eugen Deur</h2>
+        <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
+        <p class="card-date">Datum: 01/2030</p>
 
-            <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
-        </div>
-        <div class="card">
-            <img class="logo" src="~/lib/images/icon.png" />
-            <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice:  xxxx xxxx xxxx xxxx</p>
-            <p class="card-date">Datum: 07/2027</p>
+        <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
+        </div> *@
+        @* <div class="card">
+        <img class="logo" src="~/lib/images/icon.png" />
+        <h2>@Model[3].FullName</h2>
+        <p class="card-number">Broj kartice: @Model[3].CardNumber</p>
+        <p class="card-date">Datum: 07/2027</p>
 
-            <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
-        </div>
-        
-        
-        </div>
-
-    </body>
+        <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
+        </div> *@
+    </div>
+</body>
 </html>

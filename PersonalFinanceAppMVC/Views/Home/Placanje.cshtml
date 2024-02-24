@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Globalization
+@model List<MyTransaction>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,16 +50,19 @@
         </thead>
         <tbody>
             <!-- Negative transactions -->
+           @foreach (var payment in Model)
+        {
             <tr>
-                <td>1</td>
-                <td>2024-01-01 10:00</td>
-                <td>Isplata na bankomatu</td>
-                <td>-100.00</td>
-                <td>Bankomat XYZ</td>
-                <td>Gotovina</td>
-                <td>Isplata mjesečnih troškova</td>
+                <td>@payment.Id</td>
+                    <td>@payment.DateOfTransaction.ToString("d/MM/yyyy")</td>
+                    <td>@(payment.TypeOfTransaction ? "Isplata" : "Online kupovina")</td>
+                <td>@payment.TransactionAmount</td>
+                <td>@payment.Location</td>
+                    <td>@(payment.MethodOfPayment ? "Gotovina" : "Kartično plaćanje")
+                <td>@payment.Description</td>
             </tr>
-            <tr>
+        }
+            @*<tr>
                 <td>2</td>
                 <td>2024-01-01 10:00</td>
                 <td>Isplata na bankomatu</td>
@@ -187,33 +192,15 @@
                 <td>Kupnja knjige</td>
             </tr>
             <!-- More positive transactions -->
-        </tbody>
-        <tfoot>
+            </tbody>*@
+            <tfoot>
             <tr>
-        <td colspan="3">COUNT</td>
-        <td id="totalAmount">0</td>
-        <td colspan="3">SUM: <span id="totalCount">0</span></td>
+                <td colspan="3">COUNT</td>
+                <td id="totalAmount">@ViewBag.SumaTransakcija</td>
+                <td colspan="3">SUM: <span id="totalCount">@ViewBag.BrojTransakcija</span></td>
         </tr>
         </tfoot>
     </table>
-    <script>
-        
-        var tbody = document.getElementById('transactionTable').getElementsByTagName('tbody')[0];
-
-        // Count the number of rows (transactions)
-        var rowCount = tbody.getElementsByTagName('tr').length;
-
-        // Calculate the sum of transaction amounts
-        var totalAmount = 0;
-        var rows = tbody.getElementsByTagName('tr');
-        for (var i = 0; i < rows.length; i++) {
-            var amountCell = rows[i].getElementsByTagName('td')[3]; 
-            totalAmount += parseFloat(amountCell.textContent);
-        }
-
-        
-        document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
-        document.getElementById('totalCount').textContent = rowCount;
-    </script>
+    
 </body>
 </html>
