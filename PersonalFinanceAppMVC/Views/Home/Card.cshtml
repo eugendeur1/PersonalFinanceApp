@@ -1,10 +1,13 @@
-﻿ <!DOCTYPE html>
+﻿@model modelCard
+
+
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
-            h2{
+            h1{
             margin: auto;
             text-align: center;
             }
@@ -28,7 +31,7 @@
                 padding: 20px;
             }
 
-        .logo {
+            .logo {
             position: absolute;
             top: 10px;
             left: 240px;
@@ -37,15 +40,15 @@
             display:inline;
             }
 
-            .card h2 {
-                padding-left:5px;
-                font-size:15px;
-               margin-top:45px;
-                text-align: left;
-                margin-bottom:20px;
-            }
+        .card h2 {
+            padding-left: 5px;
+            font-size: 15px;
+            margin-top: 45px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
 
-            .card-number, .card-date {
+            .card-number, .card-date  {
             padding-left: 5px;
                 text-align:left;
             }
@@ -64,21 +67,24 @@
                 </style>
     </head>
     <body>
-    <h2>Kartice</h2>
+    <h1>Kartice</h1>
         <div class="flex-container">
-
+        @foreach (var number in Model.CardNumbers)
+        {
         <div class="card">
-                <img class="logo" src="~/lib/images/icon.png" />
-                <h2>Eugen Deur</h2>
-                <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
-                <p class="card-date">Datum: 05/2029</p>
-              
-            <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
-            </div>
+                    <img class="logo" src="~/lib/images/icon.png" />
+                    <h2>Eugen Deur</h2>
+            <p class="card-number">Broj kartice: @number </p>
+                    <p class="card-date">Datum: 05/2029</p>
+
+                    <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
+                </div>
+        }
+        
         <div class="card">
             <img class="logo" src="~/lib/images/icon.png" />
             <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
+            <p class="card-number">Broj kartice: xxxx xxxx xxxx xxxx</p>
             <p class="card-date">Datum: 09/2028</p>
 
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
@@ -86,7 +92,7 @@
         <div class="card">
             <img class="logo" src="~/lib/images/icon.png" />
             <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
+            <p class="card-number">Broj kartice:  xxxx xxxx xxxx xxxx</p>
             <p class="card-date">Datum: 01/2030</p>
 
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
@@ -94,12 +100,14 @@
         <div class="card">
             <img class="logo" src="~/lib/images/icon.png" />
             <h2>Eugen Deur</h2>
-            <p class="card-number">Broj kartice: XXXX XXXX XXXX XXXX</p>
+            <p class="card-number">Broj kartice:  xxxx xxxx xxxx xxxx</p>
             <p class="card-date">Datum: 07/2027</p>
 
             <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
         </div>
+        
+        
         </div>
+
     </body>
 </html>
-

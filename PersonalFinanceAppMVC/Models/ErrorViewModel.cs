@@ -7,3 +7,6 @@ namespace PersonalFinanceAppMVC.Models
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
+   
+
+

@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinanceAppMVC.Models;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+
 
 namespace PersonalFinanceAppMVC.Controllers
 {
@@ -48,7 +49,7 @@ namespace PersonalFinanceAppMVC.Controllers
         {
             return View();
         }
-        public IActionResult Racun()
+        public IActionResult Profil()
         {
             return View();
         }
@@ -76,8 +77,7 @@ namespace PersonalFinanceAppMVC.Controllers
         {
             return View();
         }
-
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
