@@ -6,5 +6,6 @@
         public string FullName { get; set; }
         public DateTime ExpirationDate { get; set; }
         public bool Visa { get; set; }
+        public string Username { get; set; }
     }
 }

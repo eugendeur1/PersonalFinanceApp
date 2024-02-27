@@ -87,7 +87,8 @@
 <body>
     <h3>Kartice</h3>
     <div class="flex-container">
-
+        @* <a href="@Url.Action("Card", "Home", new { year = 2023 })">2023</a> *@
+        <a href="/Home/Card?year=2023">Odi na 2023</a>
         @foreach (var card in Model)
         {
             <div class="card">

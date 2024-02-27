@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PersonalFinanceAppMVC.Data;
 using PersonalFinanceAppMVC.Models;
 using System.Diagnostics;
 using System.Globalization;
@@ -9,6 +10,7 @@ namespace PersonalFinanceAppMVC.Controllers
 {
     public class HomeController : Controller
     {
+        static string MyUsername = "eugen.deur";
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -30,49 +32,18 @@ namespace PersonalFinanceAppMVC.Controllers
             return View();
         }
 
-        public IActionResult Card()
+        public IActionResult Card(int year, bool visa)
         {
-            var myListOfCards = new List<MyCard>();
-
-            var brownCard = new MyCard()
+            var allCardsFromDb = DbTables.Cards;
+            /////////////////////////
+            var filteredCards = new List<MyCard>();
+            foreach (var card in allCardsFromDb)
             {
-                CardNumber = 1234567890,
-                FullName = "Eugen Deur",
-                ExpirationDate = DateTime.Parse("2024-02-23"),
-                Visa = true
-            };
-            var redCard = new MyCard()
-            {
-                CardNumber = 1234567891,
-                FullName = "Tomislav Tolj ",
-                ExpirationDate = DateTime.Parse("2024-04-23"),
-                Visa = false
-            };
-            var greenCard = new MyCard()
-            {
-                CardNumber = 1234567892,
-                FullName = "Luka Modri",
-                ExpirationDate = DateTime.Parse("2024-05-23"),
-                Visa = false
-            };
-            var whiteCard = new MyCard()
-            {
-                CardNumber = 1234567893,
-                FullName = "Albert Einstein",
-                ExpirationDate = DateTime.Parse("2024-06-23"),
-                Visa = true
-            };
-            myListOfCards.Add(brownCard);
-            myListOfCards.Add(redCard);
-            myListOfCards.Add(greenCard);
-            myListOfCards.Add(whiteCard);
-
-            if (myListOfCards.Count > 8)
-            {
-                myListOfCards = myListOfCards.Take(8).ToList();
+                if(card.ExpirationDate.Year == year)
+                    filteredCards.Add(card);
             }
 
-            return View(myListOfCards);
+            return View(filteredCards);
         }
         public IActionResult Placanje()
         {
@@ -170,7 +141,14 @@ namespace PersonalFinanceAppMVC.Controllers
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Profil()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Profil(ProfileFormData data)
         {
             return View();
         }
