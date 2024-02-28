@@ -4,6 +4,7 @@ using PersonalFinanceAppMVC.Models;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace PersonalFinanceAppMVC.Controllers
@@ -32,103 +33,28 @@ namespace PersonalFinanceAppMVC.Controllers
             return View();
         }
 
-        public IActionResult Card(int year, bool visa)
+        public IActionResult Card(int year, bool? Visa)
         {
             var allCardsFromDb = DbTables.Cards;
-            /////////////////////////
-            var filteredCards = new List<MyCard>();
-            foreach (var card in allCardsFromDb)
-            {
-                if(card.ExpirationDate.Year == year)
-                    filteredCards.Add(card);
-            }
+
+           
+            var filteredCards = allCardsFromDb.Where(card =>
+                (year == 0 || card.ExpirationDate.Year == year) && 
+                (!Visa.HasValue || card.Visa == Visa.Value)       
+            ).ToList();
 
             return View(filteredCards);
         }
         public IActionResult Placanje()
         {
-            var myListOfPayments = new List<MyTransaction>();
-
-            var Transaction1 = new MyTransaction()
-            {
-                Id = 1,
-                DateOfTransaction = DateTime.Parse("2024-01-03"),
-                TypeOfTransaction = true,
-                TransactionAmount = -100,
-                Location = "bankomat x-y-z",
-                MethodOfPayment = true,
-                Description = "Isplata na bankomatu"
-            };
-            var Transaction2 = new MyTransaction()
-            {
-                Id = 2,
-                DateOfTransaction = DateTime.Parse("2024-01-17"),
-                TypeOfTransaction = true,
-                TransactionAmount = -100,
-                Location = "bankomat x-y-z",
-                MethodOfPayment = true,
-                Description = "Isplata na bankomatu"
-            };
-            var Transaction3 = new MyTransaction()
-            {
-                Id = 3,
-                DateOfTransaction = DateTime.Parse("2024-01-23"),
-                TypeOfTransaction = false,
-                TransactionAmount = -100,
-                Location = "Crujff d.o.o.",
-                MethodOfPayment = false,
-                Description = "Kupnja tenisica"
-            };
-            var Transaction4 = new MyTransaction()
-            {
-                Id = 4,
-                DateOfTransaction = DateTime.Parse("2024-02-20"),
-                TypeOfTransaction = false,
-                TransactionAmount = -1000,
-                Location = "Adidas d.o.o.",
-                MethodOfPayment = false,
-                Description = "Kupnja tenisica"
-            };
-            var Transaction5 = new MyTransaction()
-            {
-                Id = 5,
-                DateOfTransaction = DateTime.Parse("2024-01-22"),
-                TypeOfTransaction = true,
-                TransactionAmount = -1000,
-                Location = "bankomat x-y-z",
-                MethodOfPayment = true,
-                Description = "Isplata na bankomatu"
-            };
-            var Transaction6 = new MyTransaction()
-            {
-                Id = 6,
-                DateOfTransaction = DateTime.Parse("2024-01-12"),
-                TypeOfTransaction = false,
-                TransactionAmount = -800,
-                Location = "Nike d.o.o.",
-                MethodOfPayment = false,
-                Description = "Kupnja tenisica"
-            };
-            
-            myListOfPayments .Add(Transaction1);
-            myListOfPayments .Add(Transaction2);
-            myListOfPayments .Add(Transaction3);
-            myListOfPayments .Add(Transaction4);
-            myListOfPayments .Add(Transaction5);
-            myListOfPayments .Add(Transaction6);
+            var myListOfPayments = DbTables.Transactions;
 
             int sumaTransakcija = myListOfPayments.Sum(t => t.TransactionAmount);
-
-            
             int brojTransakcija = myListOfPayments.Count;
-
             ViewBag.BrojTransakcija = brojTransakcija;
             ViewBag.SumaTransakcija = sumaTransakcija;
             
-
-            return View(myListOfPayments);
-
-            
+            return View(myListOfPayments);  
         }
         public IActionResult Statistika() {
             return View();
@@ -144,13 +70,25 @@ namespace PersonalFinanceAppMVC.Controllers
         [HttpGet]
         public IActionResult Profil()
         {
-            return View();
+            var lastProfile = DbTables.UserProfiles.LastOrDefault();
+            return View(lastProfile);
+           
         }
 
         [HttpPost]
         public IActionResult Profil(ProfileFormData data)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+               
+                DbTables.UserProfiles.Clear();
+                DbTables.UserProfiles.Add(data);
+
+                return RedirectToAction("Profil");
+            }
+
+            
+            return View(data);
         }
         public IActionResult Prihod()
         {

@@ -1,4 +1,6 @@
-﻿namespace PersonalFinanceAppMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PersonalFinanceAppMVC.Models
 {
     public class ProfileFormData
     {
@@ -8,4 +10,5 @@
         public string lokacija { get; set; }
         public string jezik { get; set; }
     }
+
 }

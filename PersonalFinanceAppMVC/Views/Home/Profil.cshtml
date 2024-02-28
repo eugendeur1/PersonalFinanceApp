@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model ProfileFormData
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,8 +45,44 @@
     </style>
 </head>
 <body>
-    
     <div class="container">
+        @if (Model != null)
+        {
+            <div>
+                <p>Posljednje spremljeni podaci:</p>
+                <p>@Model.ime_prezime, @Model.email, @Model.telefon, @Model.lokacija, @Model.jezik </p>
+            </div>
+        }
+        <h2>Profil</h2>
+
+        <form asp-action="Profil" method="post">
+            <div class="form-group">
+                <label for="ime_prezime">Ime prezime:</label>
+                <input type="text" id="ime_prezime" name="ime_prezime" value="@Model.ime_prezime" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email adresa:</label>
+                <input type="text" id="email" name="email" value="@Model.email" required>
+            </div>
+            <div class="form-group">
+                <label for="telefon">Broj telefona:</label>
+                <input type="text" id="telefon" name="telefon" value="@Model.telefon" required>
+            </div>
+            <div class="form-group">
+                <label for="lokacija">Lokacija:</label>
+                <select id="lokacija" name="lokacija" value="@Model.lokacija">
+                </select>
+            </div>
+            <!-- Jezik -->
+            <div class="form-group">
+                <label for="jezik">Jezik:</label>
+                <select id="jezik" name="jezik" value="@Model.jezik">
+                </select>
+            </div>
+            <button type="submit">Spremi</button>
+        </form>
+    </div>
+   @* <div class="container">
         <h2>Profil</h2>
         <form action="#" method="post">
             <div class="form-group">
@@ -64,22 +101,22 @@
             <div class="form-group">
                 <label for="lokacija">Lokacija:</label>
                 <select id="lokacija" name="lokacija">
-                    <!-- Country options will be dynamically generated here -->
+                    
                 </select>
             </div>
             <!-- Jezik -->
             <div class="form-group">
                 <label for="jezik">Jezik:</label>
                 <select id="jezik" name="jezik">
-                    <!-- Language options will be dynamically generated here -->
+                    
                 </select>
             </div>
             <button type="submit">Spremi</button>
         </form>
-    </div>
+    </div>*@
 
     <script>
-        // Function to add country options
+        
         function addCountryOptions() {
             var select = document.getElementById('lokacija');
             fetch('https://restcountries.com/v3.1/all')
@@ -95,7 +132,7 @@
                 .catch(error => console.error('Error fetching countries:', error));
         }
 
-        // Function to add language options
+        
         function addLanguageOptions() {
             var select = document.getElementById('jezik');
             fetch('https://restcountries.com/v3.1/all')
@@ -119,7 +156,7 @@
                 .catch(error => console.error('Error fetching languages:', error));
         }
 
-        // Call the functions to add options when the page loads
+       
         window.onload = function () {
             addCountryOptions();
             addLanguageOptions();
