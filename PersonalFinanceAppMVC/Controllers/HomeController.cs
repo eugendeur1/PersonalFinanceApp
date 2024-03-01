@@ -78,6 +78,8 @@ namespace PersonalFinanceAppMVC.Controllers
         [HttpPost]
         public IActionResult Profil(ProfileFormData data)
         {
+            //if (data.telefon == "")
+            //    return View(data);
             if (ModelState.IsValid)
             {
                
@@ -87,8 +89,8 @@ namespace PersonalFinanceAppMVC.Controllers
                 return RedirectToAction("Profil");
             }
 
-            
-            return View(data);
+
+            return RedirectToAction("Error");
         }
         public IActionResult Prihod()
         {
@@ -114,7 +116,7 @@ namespace PersonalFinanceAppMVC.Controllers
         {
             return View();
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
