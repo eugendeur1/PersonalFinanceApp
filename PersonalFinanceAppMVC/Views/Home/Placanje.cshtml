@@ -6,33 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plaćanje</title>
-    <style>
-        h2 {
-            margin: auto;
-            text-align: center;
-            padding-bottom:25px;
-        }
-        table {
-           padding-top:25px;
-            margin:auto;
-           text-align:center;
-            border-collapse: collapse;
-            width: 70%;        }
-        
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tfoot td {
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/Placanje.css" />
 </head>
 <body>
     <h2>Identifikator transakcije</h2>
@@ -49,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Negative transactions -->
+           
            @foreach (var payment in Model)
         {
             <tr>
@@ -62,8 +36,7 @@
                 <td>@payment.Description</td>
             </tr>
         }
-           
-               
+      
             </tbody>
             <tfoot>
             <tr>

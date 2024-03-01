@@ -1,0 +1,77 @@
+﻿body {
+}
+h3 {
+    margin: auto;
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.card {
+    width: 300px;
+    height: 200px;
+    border-radius: 20px;
+    background-color: greenyellow;
+    position: relative;
+    box-shadow: 8px 8px 12px rgba(0,0,0,0.3);
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 240px;
+    width: 30px;
+    height: 30px;
+    display: inline;
+}
+
+.card h2 {
+    padding-left: 5px;
+    font-size: 15px;
+    margin-top: 45px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.card-number, .card-date {
+    padding-left: 5px;
+    text-align: left;
+}
+
+.visa-logo {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 60px;
+    height: 30px;
+}
+
+.card:first-child {
+    background-color: bisque;
+}
+
+.card:last-child {
+    background-color: white;
+}
+
+.card:nth-child(2) {
+    background-color: red;
+}
+
+.master-logo {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 80px;
+    height: 50px;
+}
