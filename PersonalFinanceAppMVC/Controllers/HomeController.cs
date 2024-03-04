@@ -4,6 +4,7 @@ using PersonalFinanceAppMVC.Models;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.Serialization;
+using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
@@ -61,36 +62,88 @@ namespace PersonalFinanceAppMVC.Controllers
         }
         public IActionResult Izvjesce()
         {
-            return View();
+            
+
+            return View( );
         }
+        
+        [HttpGet]
         public IActionResult Proracun()
         {
-            return View();
+            var myListOfBudget = DbTables.Proracuni.OrderByDescending(p => p.Month).ToList();
+            return View(myListOfBudget);
         }
+
+      
+        [HttpPost]
+        public IActionResult Proracun(MyProracun data)
+        {
+            if (DbTables.Proracuni.Any(p => p.Month == data.Month))
+            {
+                ModelState.AddModelError("Month", "Budget for this month already exists.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+            DbTables.Proracuni.Add(data);
+            return RedirectToAction(nameof(Proracun));
+        }
+
+
         [HttpGet]
         public IActionResult Profil()
         {
+            
             var lastProfile = DbTables.UserProfiles.LastOrDefault();
             return View(lastProfile);
            
         }
-
+       
         [HttpPost]
         public IActionResult Profil(ProfileFormData data)
         {
-            //if (data.telefon == "")
-            //    return View(data);
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(data.ime_prezime))
             {
-               
-                DbTables.UserProfiles.Clear();
-                DbTables.UserProfiles.Add(data);
-
-                return RedirectToAction("Profil");
+                return RedirectToAction("Error", new { message = "Full name is required." });
             }
+            if (!Regex.IsMatch(data.ime_prezime, @"^[a-zA-Z\s]+$"))
+            {
+                return RedirectToAction("Error", new { message = "Full name must contain only letters and spaces." });
+            }
+            if (data.ime_prezime.Length > 30)
+            {
+                return RedirectToAction("Error", new { message = "Full name cannot contain more than 30 letters and spaces." });
+            }
+            if (string.IsNullOrWhiteSpace(data.email) || !Regex.IsMatch(data.email, @"^[^@\s]+@[^@\s]+$"))
+            {
+                return RedirectToAction("Error", new { message = "Email must contain text on both sides of '@'." });
+            }
+            if (!Regex.IsMatch(data.telefon, @"^[0-9]+$"))
+            {
+                return RedirectToAction("Error", new { message = "Phone number must contain only numeric characters." });
+            }
+            if (data.lokacija == "Croatia")
+            {
+                if (string.IsNullOrWhiteSpace(data.telefon) || !int.TryParse(data.telefon, out _) || data.telefon[0] != '0')
+                {
+                    return RedirectToAction("Error", new { message = "Phone number for Croatia must be a number and start with '0' and cant contain more than 10 numbers." });
+                }
+                if (data.telefon.Length > 10)
+                {
+                    return RedirectToAction("Error", new { message = "Phone number for Croatia must contain exactly 10 digits." });
+                }
 
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(data);
+            }
+            DbTables.UserProfiles.Clear();
+            DbTables.UserProfiles.Add(data);
 
-            return RedirectToAction("Error");
+            return RedirectToAction("Profil");
         }
         public IActionResult Prihod()
         {
@@ -118,8 +171,9 @@ namespace PersonalFinanceAppMVC.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Error(string message)
         {
+            ViewData["ErrorMessage"] = message ?? "An error occurred.";
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

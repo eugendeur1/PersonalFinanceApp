@@ -7,7 +7,7 @@ namespace PersonalFinanceAppMVC.Models
         public string ime_prezime { get; set; }
         public string? email { get; set; }
 
-        //[Required]
+       
         //[StringLength(10, MinimumLength = 9)]
         //[RegularExpression(@"[0-9]*")]
         public string telefon { get; set; }

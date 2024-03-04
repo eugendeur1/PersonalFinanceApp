@@ -10,34 +10,44 @@
 </head>
 <body>
     <h3>Kartice</h3>
+    <div class="search-bar-box">
+        <label for="searchText">Search:</label>
+        <input type="text" id="searchText" name="searchText" placeholder="Search...">
+    </div>
+
     @using (Html.BeginForm("Card", "Home", FormMethod.Get))
     {
-        <label for="year">Select Year:</label>
-        <select name="year" id="year">
-            <option value="0">All Years</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-        </select>
+        <div class="select-container">
+            <label for="year"></label>
+            <select name="year" id="year" class="custom-select">
+                <option value="0">All Years</option>
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+            </select>
 
-        <label for="visa">Select Card Type:</label>
-        <select name="Visa" id="visa">
-            <option value="">All Cards</option>
-            <option value="true">Visa</option>
-            <option value="false">Master Card</option>
-        </select>
+            <label for="visa"></label>
+            <select name="Visa" id="visa" class="custom-select">
+                <option value="">All Cards</option>
+                <option value="true">Visa</option>
+                <option value="false">Master Card</option>
+            </select>
 
-        <input type="submit" value="Filter" />
+            <input class="submit" type="submit" value="Filter" />
+        </div>
     }
     <div class="flex-container">
-   
         @foreach (var card in Model)
         {
             <div class="card">
                 <img class="logo" src="~/lib/images/icon.png" />
                 <h2>@card.FullName</h2>
-                <p class="card-number">Broj kartice: @card.CardNumber</p>
-                <p class="card-date">Datum: @card.ExpirationDate.ToString("MM/yyyy", CultureInfo.InvariantCulture)</p>
+                <p class="card-number">
+                    <span class="card-number-text">@card.CardNumber</span>
+                </p>
+                <p class="card-date">
+                    <span class="card-date-text">@card.ExpirationDate.ToString("MM/yyyy", CultureInfo.InvariantCulture)</span>
+                </p>
                 @if (card.Visa)
                 {
                     <img class="visa-logo" src="~/lib/images/VISA-removebg-preview.png" />
@@ -48,6 +58,26 @@
                 }
             </div>
         }
-    </div>     
+    </div>
+    <script>
+        function highlightText() {
+            var searchText = document.getElementById("searchText").value;
+            var cardProperties = document.querySelectorAll(".card *");
+
+            cardProperties.forEach(function (property) {
+                property.innerHTML = property.textContent;
+            });
+
+            cardProperties.forEach(function (property) {
+                var regex = new RegExp(searchText, "gi");
+                property.innerHTML = property.textContent.replace(regex, function (match) {
+                    return "<span class='highlight'>" + match + "</span>";
+                });
+            });
+        }
+
+       
+        document.getElementById("searchText").addEventListener("input", highlightText);
+    </script>
 </body>
 </html>

@@ -1,77 +1,131 @@
-﻿body {
-}
-h3 {
+﻿    body {
+        margin:0;
+        padding:0;
+    }
+    h3 {
+        margin: auto;
+        text-align: center;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-top: 20px;
+        gap: 20px;
+    }
+
+    .card {
+        width: 300px;
+        height: 200px;
+        border-radius: 20px;
+        background-color: greenyellow;
+        position: relative;
+        box-shadow: 8px 8px 12px rgba(0,0,0,0.3);
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .logo {
+        position: absolute;
+        top: 10px;
+        left: 240px;
+        width: 30px;
+        height: 30px;
+        display: inline;
+    }
+
+    .card h2 {
+        padding-left: 5px;
+        font-size: 15px;
+        margin-top: 45px;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .card-number, .card-date {
+        padding-left: 5px;
+        text-align: left;
+    }
+
+    .visa-logo {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 60px;
+        height: 30px;
+    }
+
+    .card:first-child {
+        background-color: bisque;
+    }
+
+    .card:last-child {
+        background-color: white;
+    }
+
+    .card:nth-child(2) {
+        background-color: red;
+    }
+
+    .master-logo {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 80px;
+        height: 50px;
+    }
+    .highlight {
+        background-color: lightblue;
+    }
+    .search-bar-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .search-bar-box label {
+        margin-right: 10px; /* Add some spacing between the label and the input */
+    }
+
+    .search-bar-box input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        /* Add any other styles you need */
+    }
+    .search-bar-box input {
+        width: 500px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    }
+.select-container {
+    margin-top: 25px;
     margin: auto;
     text-align: center;
 }
 
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-top: 20px;
-    gap: 20px;
-}
-
-.card {
-    width: 300px;
-    height: 200px;
-    border-radius: 20px;
-    background-color: greenyellow;
-    position: relative;
-    box-shadow: 8px 8px 12px rgba(0,0,0,0.3);
-}
-
-.card-content {
-    padding: 20px;
-}
-
-.logo {
-    position: absolute;
-    top: 10px;
-    left: 240px;
-    width: 30px;
-    height: 30px;
-    display: inline;
-}
-
-.card h2 {
-    padding-left: 5px;
+.custom-select {
+    background-color: gray;
+    color: black;
+    border: 5px;
+    font-family: "Roboto", "Arial", sans-serif;
     font-size: 15px;
-    margin-top: 45px;
-    text-align: left;
-    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
 }
-
-.card-number, .card-date {
-    padding-left: 5px;
-    text-align: left;
-}
-
-.visa-logo {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 60px;
-    height: 30px;
-}
-
-.card:first-child {
-    background-color: bisque;
-}
-
-.card:last-child {
+.submit {
     background-color: white;
+    color: black;
+    border: 5px;
+    font-family: "Roboto", "Arial", sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.card:nth-child(2) {
-    background-color: red;
-}
-
-.master-logo {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 80px;
-    height: 50px;
-}

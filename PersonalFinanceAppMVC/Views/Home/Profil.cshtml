@@ -1,4 +1,5 @@
-﻿@model ProfileFormData
+﻿@using System.Globalization
+@model ProfileFormData
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,10 +46,10 @@
             <button type="submit">Spremi</button>
         </form>
     </div>
-   
+
 
     <script>
-        
+
         function addCountryOptions() {
             var select = document.getElementById('lokacija');
             fetch('https://restcountries.com/v3.1/all')
@@ -64,7 +65,7 @@
                 .catch(error => console.error('Error fetching countries:', error));
         }
 
-        
+
         function addLanguageOptions() {
             var select = document.getElementById('jezik');
             fetch('https://restcountries.com/v3.1/all')
@@ -88,7 +89,7 @@
                 .catch(error => console.error('Error fetching languages:', error));
         }
 
-       
+
         window.onload = function () {
             addCountryOptions();
             addLanguageOptions();

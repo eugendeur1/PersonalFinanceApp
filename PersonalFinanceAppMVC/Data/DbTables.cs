@@ -1,4 +1,5 @@
 ﻿using PersonalFinanceAppMVC.Models;
+using static PersonalFinanceAppMVC.Models.MyProracun;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PersonalFinanceAppMVC.Data
@@ -26,6 +27,14 @@ namespace PersonalFinanceAppMVC.Data
         {
             new ProfileFormData() { ime_prezime = "", email = "", telefon = "", lokacija = "", jezik = "" }
         };
+        public static List<MyProracun> Proracuni { get; } = new List<MyProracun>()
+        {
+            new MyProracun { Id = 1, budzet = 1000, Month = Month.January, Department = Department.Finance },
+            new MyProracun { Id = 2, budzet = 1500, Month = Month.February, Department = Department.Videogames },
+            new MyProracun { Id = 3, budzet = 2000, Month = Month.March, Department = Department.Program }
+        };
     }
-    
+
 }
+    
+
