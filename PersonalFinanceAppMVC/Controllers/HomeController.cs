@@ -37,12 +37,14 @@ namespace PersonalFinanceAppMVC.Controllers
         public IActionResult Card(int year, bool? Visa)
         {
             var allCardsFromDb = DbTables.Cards;
-
            
             var filteredCards = allCardsFromDb.Where(card =>
                 (year == 0 || card.ExpirationDate.Year == year) && 
                 (!Visa.HasValue || card.Visa == Visa.Value)       
             ).ToList();
+
+            ViewBag.SelectedYear = year;
+            ViewBag.SelectedVisa = Visa;
 
             return View(filteredCards);
         }
