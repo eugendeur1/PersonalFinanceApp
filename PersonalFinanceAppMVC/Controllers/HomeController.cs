@@ -90,6 +90,7 @@ namespace PersonalFinanceAppMVC.Controllers
                     return RedirectToAction("Error", new { message = "You cannot choose a month that is already taken." });
                 }
             }
+            DbTables.Proracuni.Add(data);
             return RedirectToAction("Proracun");
         }
         [HttpGet]
