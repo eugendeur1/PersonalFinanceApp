@@ -5,7 +5,7 @@ namespace PersonalFinanceAppMVC.Models
     public class MyProracun
     {
         public int Id { get; set; }
-        public int budzet { get; set; }
+        public string budzet { get; set; }
         public Month Month { get; set; }
         public Department Department { get; set; }
     }

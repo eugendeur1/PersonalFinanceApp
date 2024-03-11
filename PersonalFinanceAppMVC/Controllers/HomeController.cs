@@ -66,32 +66,30 @@ namespace PersonalFinanceAppMVC.Controllers
 
             return View( );
         }
-        
         [HttpGet]
         public IActionResult Proracun()
         {
-            var myListOfBudget = DbTables.Proracuni.OrderByDescending(p => p.Month).ToList();
-            return View(myListOfBudget);
+            var myListOfProracuni = DbTables.Proracuni;
+            return View(myListOfProracuni);
         }
-
-      
         [HttpPost]
         public IActionResult Proracun(MyProracun data)
         {
-            if (DbTables.Proracuni.Any(p => p.Month == data.Month))
+            if (!Regex.IsMatch(data.budzet, @"^[1-9][0-9]+$"))
             {
-                ModelState.AddModelError("Month", "Budget for this month already exists.");
+                return RedirectToAction("Error", new { message = "Phone number must contain only numeric characters." });
             }
+            List<MyProracun> existingMonths = DbTables.Proracuni.ToList();
 
-            if (!ModelState.IsValid)
+            foreach (var item in existingMonths)
             {
-                return View(data);
+                if (item.Month == data.Month)
+                {
+                    return RedirectToAction("Error", new { message = "You cannot choose a month that is already taken." });
+                }
             }
-            DbTables.Proracuni.Add(data);
-            return RedirectToAction(nameof(Proracun));
+            return RedirectToAction("Proracun");
         }
-
-
         [HttpGet]
         public IActionResult Profil()
         {

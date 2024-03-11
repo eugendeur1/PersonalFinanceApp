@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyProracun>
+﻿@model List<MyProracun>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="~/css/Proracun.css" />
 </head>
 <body>
-
-    <h2>Proracun</h2>
-
     <table class="table">
+
+
         <thead>
             <tr>
                 <th>Id</th>
@@ -21,28 +20,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var budget in Model)
+
+            @foreach (var item in Model)
             {
                 <tr>
-                    <td>@budget.Id</td>
-                    <td>@budget.budzet</td>
-                    <td>@budget.Month</td>
-                    <td>@budget.Department</td>
+                    <td>@item.Id</td>
+                    <td>@item.budzet</td>
+                    <td>@item.Month</td>
+                    <td>@item.Department</td>
                 </tr>
             }
+
         </tbody>
+
     </table>
 
     <div class="form-container">
         <h2>Add Proracun</h2>
-        <form id="proracunForm" action="submit" method="post">
+        <form id="proracunForm" method="post">
             <div class="form-group">
-                <label for="allowedBudget">Allowed Budget:</label>
-                <input type="text" id="allowedBudget" name="allowedBudget" required>
+                <label for="budzet">Allowed Budget:</label>
+                <input type="text" id="budzet" name="budzet">
             </div>
             <div class="form-group">
                 <label for="month">Month:</label>
-                <select id="month" name="month" required>
+                <select id="month" name="Month" required>
                     <option value="">-- Select Month --</option>
                     @foreach (var month in Enum.GetNames(typeof(Month)))
                     {
@@ -52,11 +54,12 @@
             </div>
             <div class="form-group">
                 <label for="department">Department:</label>
-                <select id="department" name="department" required>
+                <select id="department" name="Department" required>
                     <option value="">-- Select Department --</option>
-                    <option value="Department1">Finance</option>
-                    <option value="Department2">Videogames</option>
-                    <option value="Department3">Program</option>
+                    @foreach (var department in Enum.GetNames(typeof(Department)))
+                    {
+                        <option value="@department">@department</option>
+                    }
                 </select>
             </div>
             <button type="submit">Save</button>
@@ -69,9 +72,9 @@
             form.addEventListener("submit", function (event) {
                 event.preventDefault();
 
-                var allowedBudget = document.getElementById("allowedBudget").value;
+                var allowedBudget = document.getElementById("budzet").value;
                 var month = document.getElementById("month").value;
-                var department = document.getElementById("department").options[document.getElementById("department").selectedIndex].text;
+                var department = document.getElementById("department").value;
 
                 if (!/^\d+$/.test(allowedBudget)) {
                     alert("Allowed budget must be a number.");

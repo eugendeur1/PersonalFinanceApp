@@ -8,4 +8,5 @@
         public bool Visa { get; set; }
         public string Username { get; set; }
     }
+   
 }

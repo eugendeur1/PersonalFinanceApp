@@ -12,7 +12,8 @@ namespace PersonalFinanceAppMVC.Data
             new MyCard() { CardNumber = 1234567891, FullName = "Tomislav Tolj", ExpirationDate = DateTime.Parse("2024-01-25"), Visa = true, Username = "eugen.deur" },
             new MyCard() { CardNumber = 1234567892, FullName = "Luka Modrić", ExpirationDate = DateTime.Parse("2023-03-23"), Visa = false, Username = "eugen.deur" },
             new MyCard() { CardNumber = 1234567893, FullName = "Albert Einstein", ExpirationDate = DateTime.Parse("2022-01-23"), Visa = false , Username = "eugen.deur"},
-        };
+
+    };
         public static List<MyTransaction> Transactions { get; set; } = new List<MyTransaction>()
         {
             new MyTransaction() { Id = 1,DateOfTransaction = DateTime.Parse("2024-01-03"), TypeOfTransaction = true,TransactionAmount = -100, Location = "bankomat x-y-z", MethodOfPayment = true,Description = "Isplata na bankomatu" },
@@ -29,9 +30,9 @@ namespace PersonalFinanceAppMVC.Data
         };
         public static List<MyProracun> Proracuni { get; } = new List<MyProracun>()
         {
-            new MyProracun { Id = 1, budzet = 1000, Month = Month.January, Department = Department.Finance },
-            new MyProracun { Id = 2, budzet = 1500, Month = Month.February, Department = Department.Videogames },
-            new MyProracun { Id = 3, budzet = 2000, Month = Month.March, Department = Department.Program }
+            new MyProracun { Id = 1, budzet = "1000", Month = Month.January, Department = Department.Finance },
+            new MyProracun { Id = 2, budzet = "1500", Month = Month.February, Department = Department.Videogames },
+            new MyProracun { Id = 3, budzet = "2000", Month = Month.March, Department = Department.Program }
         };
     }
 

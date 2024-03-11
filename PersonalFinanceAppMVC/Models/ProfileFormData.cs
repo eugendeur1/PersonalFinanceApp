@@ -5,7 +5,7 @@ namespace PersonalFinanceAppMVC.Models
     public class ProfileFormData
     {
         public string ime_prezime { get; set; }
-        public string? email { get; set; }
+        public string email { get; set; }
 
        
         //[StringLength(10, MinimumLength = 9)]
