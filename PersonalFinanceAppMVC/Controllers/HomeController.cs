@@ -72,6 +72,7 @@ namespace PersonalFinanceAppMVC.Controllers
         public IActionResult Proracun()
         {
             var myListOfProracuni = DbTables.Proracuni;
+            myListOfProracuni = myListOfProracuni.OrderByDescending(x => x.Month).ToList();
             return View(myListOfProracuni);
         }
         [HttpPost]
