@@ -34,18 +34,32 @@ namespace PersonalFinanceAppMVC.Controllers
             return View();
         }
 
-        public IActionResult Card(int year, bool? Visa)
+        public IActionResult Card(string searchText, int year, bool? Visa)
         {
             var allCardsFromDb = DbTables.Cards;
 
-           
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                allCardsFromDb = allCardsFromDb.Where(card =>
+                    card.FullName.Contains(searchText) ||
+                    card.CardNumber.ToString().Contains(searchText) ||
+                    card.ExpirationDate.ToString().Contains(searchText)
+                ).ToList();
+            }
+
             var filteredCards = allCardsFromDb.Where(card =>
-                (year == 0 || card.ExpirationDate.Year == year) && 
-                (!Visa.HasValue || card.Visa == Visa.Value)       
+                (year == 0 || card.ExpirationDate.Year == year) &&
+                (!Visa.HasValue || card.Visa == Visa.Value)
             ).ToList();
+
+            ViewBag.SelectedYear = year;
+            ViewBag.SelectedVisa = Visa;
+            ViewBag.SearchText = searchText;
 
             return View(filteredCards);
         }
+
+
         public IActionResult Placanje()
         {
             var myListOfPayments = DbTables.Transactions;
@@ -70,11 +84,17 @@ namespace PersonalFinanceAppMVC.Controllers
         public IActionResult Proracun()
         {
             var myListOfProracuni = DbTables.Proracuni;
+            myListOfProracuni = myListOfProracuni.OrderByDescending(x => x.Month).ToList();
             return View(myListOfProracuni);
         }
         [HttpPost]
         public IActionResult Proracun(MyProracun data)
         {
+            //dodavanje +1 na najveci Id a to je broj 3, i to vrijedi za svaik idući!!!
+            int maxId = DbTables.Proracuni.Max(p => p.Id);
+
+            data.Id = maxId + 1;
+            
             if (!Regex.IsMatch(data.budzet, @"^[1-9][0-9]+$"))
             {
                 return RedirectToAction("Error", new { message = "Phone number must contain only numeric characters." });
@@ -88,6 +108,44 @@ namespace PersonalFinanceAppMVC.Controllers
                     return RedirectToAction("Error", new { message = "You cannot choose a month that is already taken." });
                 }
             }
+            DbTables.Proracuni.Add(data);
+            return RedirectToAction("Proracun");
+        }
+        public IActionResult Detalji(int id)
+        {
+            var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == id);
+            if (proracun == null)
+            {
+                return RedirectToAction("Error", new { message = "Budget item not found." });
+            }
+            return View(proracun);
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == id);
+            if (proracun != null)
+            {
+                DbTables.Proracuni.Remove(proracun);
+            }
+            return RedirectToAction("Proracun");
+        }
+        public IActionResult Edit(int id)
+        {
+            var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == id);
+            return View(proracun);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(MyProracun updatedProracun)
+        {
+            var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == updatedProracun.Id);
+            if (proracun != null)
+            {
+                proracun.budzet = updatedProracun.budzet;
+                proracun.Month = updatedProracun.Month;
+                proracun.Department = updatedProracun.Department;
+            }
             return RedirectToAction("Proracun");
         }
         [HttpGet]
@@ -95,12 +153,13 @@ namespace PersonalFinanceAppMVC.Controllers
         {
             
             var lastProfile = DbTables.UserProfiles.LastOrDefault();
+
             return View(lastProfile);
            
         }
        
         [HttpPost]
-        public IActionResult Profil(ProfileFormData data)
+        public IActionResult Profil(ProfileFormData data) 
         {
             if (string.IsNullOrWhiteSpace(data.ime_prezime))
             {
@@ -117,6 +176,10 @@ namespace PersonalFinanceAppMVC.Controllers
             if (string.IsNullOrWhiteSpace(data.email) || !Regex.IsMatch(data.email, @"^[^@\s]+@[^@\s]+$"))
             {
                 return RedirectToAction("Error", new { message = "Email must contain text on both sides of '@'." });
+            }
+            if (string.IsNullOrEmpty(data.telefon))
+            {
+                return RedirectToAction("Error", new { message = "Phone number cant be empty" });
             }
             if (!Regex.IsMatch(data.telefon, @"^[0-9]+$"))
             {

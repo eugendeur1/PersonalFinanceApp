@@ -1,26 +1,27 @@
 ﻿@model List<MyProracun>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proracun</title>
-    <link rel="stylesheet" href="~/css/Proracun.css" />
+    <link rel="stylesheet" href="~/css/Proracun.css?v=1">
 </head>
 <body>
     <table class="table">
-
-
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Dopušteni Budžet</th>
                 <th>Mjesec</th>
                 <th>Odjel</th>
+                <th>Detail</th>
+                <th>Delete</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
-
             @foreach (var item in Model)
             {
                 <tr>
@@ -28,11 +29,19 @@
                     <td>@item.budzet</td>
                     <td>@item.Month</td>
                     <td>@item.Department</td>
+                    <td class="velicina">
+                        <a href="@Url.Action("Detalji", "Home", new { id = item.Id })"><button class="button">Detalji</button></a>
+                    </td>
+                    <td class="velicina">
+                        <form method="post" asp-action="Delete">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="button">Delete</button>
+                        </form>
+                    </td>
+                    <td><button class="button edit-button" data-id="@item.Id">Edit</button></td>
                 </tr>
             }
-
         </tbody>
-
     </table>
 
     <div class="form-container">
@@ -62,42 +71,77 @@
                     }
                 </select>
             </div>
-            <button type="submit">Save</button>
+            <button type="submit" class="Save">Save</button>
         </form>
     </div>
+    @*Nevidljivi dio koda koji se poziva kad ste stisne edit te izlazi kao popup.*@
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Proracun</h2>
+            <div class="form-container">
+                <form id="editForm" method="post" action="@Url.Action("Edit", "Home")">
+                    <div class="form-group">
+                        <label for="budzet">Allowed Budget:</label>
+                        <input type="text" id="edit-budzet" name="budzet">
+                    </div>
+                    <div class="form-group">
+                        <label for="month">Month:</label>
+                        <select id="edit-month" name="Month" required>
+                            <option value="">-- Select Month --</option>
+                            @foreach (var month in Enum.GetNames(typeof(Month)))
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department:</label>
+                        <select id="edit-department" name="Department" required>
+                            <option value="">-- Select Department --</option>
+                            @foreach (var department in Enum.GetNames(typeof(Department)))
+                            {
+                                <option value="@department">@department</option>
+                            }
+                        </select>
+                    </div>
+                    <input type="hidden" id="edit-item-id" name="Id" />
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var form = document.getElementById("proracunForm");
+        var editModal = document.getElementById('editModal');
 
-            form.addEventListener("submit", function (event) {
-                event.preventDefault();
+        var closeBtn = document.getElementsByClassName("close")[0];
 
-                var allowedBudget = document.getElementById("budzet").value;
-                var month = document.getElementById("month").value;
-                var department = document.getElementById("department").value;
+        var editButtons = document.querySelectorAll('.edit-button');
 
-                if (!/^\d+$/.test(allowedBudget)) {
-                    alert("Allowed budget must be a number.");
-                    return;
-                }
+        function openEditModal(id) {
+            document.getElementById('edit-item-id').value = id;
+            editModal.style.display = "block";
+        }
 
-                var tableBody = document.querySelector("table tbody");
+        function closeEditModal() {
+            // Hide the modal
+            editModal.style.display = "none";
+        }
 
-                var rows = tableBody.querySelectorAll("tr");
-                for (var i = 0; i < rows.length; i++) {
-                    var rowMonth = rows[i].getElementsByTagName("td")[2].textContent;
-                    if (rowMonth === month) {
-                        alert("Budget for this month already exists.");
-                        return;
-                    }
-                }
+        closeBtn.onclick = function () {
+            closeEditModal();
+        }
 
-                var newRow = document.createElement("tr");
-                newRow.innerHTML = "<td>" + (rows.length + 1) + "</td><td>" + allowedBudget + "</td><td>" + month + "</td><td>" + department + "</td>";
+        window.onclick = function (event) {
+            if (event.target == editModal) {
+                closeEditModal();
+            }
+        }
 
-                tableBody.insertBefore(newRow, tableBody.firstChild);
-
-                form.reset();
+        editButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var itemId = this.getAttribute('data-id');
+                openEditModal(itemId);
             });
         });
     </script>

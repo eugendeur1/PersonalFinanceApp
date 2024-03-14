@@ -1,45 +1,101 @@
-﻿@using System.Globalization
+﻿﻿@using System.Globalization
 @model List<MyCard>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/Card.css" />
-    
+    <link rel="stylesheet" href="~/css/Card.css?v=1">
+   
 </head>
 <body>
     <h3>Kartice</h3>
-    <div class="search-bar-box">
-        <label for="searchText">Search:</label>
-        <input type="text" id="searchText" name="searchText" placeholder="Search...">
-    </div>
 
-    @using (Html.BeginForm("Card", "Home", FormMethod.Get))
+    @using (Html.BeginForm("Card", "Home", FormMethod.Get, new { id = "filterForm" }))
     {
+        <div class="search-bar-box">
+            <label for="searchText">Search:</label>
+            <input type="text" id="searchText" name="searchText" placeholder="Search..." value="@ViewBag.SearchText">
+        </div>
+
         <div class="select-container">
             <label for="year"></label>
             <select name="year" id="year" class="custom-select">
-                <option value="0">All Years</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
+                @if (ViewBag.SelectedYear == 0)
+                {
+                    <option selected value="0">All Years</option>
+                }
+                else
+                {
+                    <option value="0">All Years</option>
+                }
+
+                @if (ViewBag.SelectedYear == 2024)
+                {
+                    <option selected value="2024">2024</option>
+                }
+                else
+                {
+                    <option value="2024">2024</option>
+                }
+
+                @if (ViewBag.SelectedYear == 2023)
+                {
+                    <option selected value="2023">2023</option>
+                }
+                else
+                {
+                    <option value="2023">2023</option>
+                }
+
+                @if (ViewBag.SelectedYear == 2022)
+                {
+                    <option selected value="2022">2022</option>
+                }
+                else
+                {
+                    <option value="2022">2022</option>
+                }
             </select>
 
             <label for="visa"></label>
             <select name="Visa" id="visa" class="custom-select">
-                <option value="">All Cards</option>
-                <option value="true">Visa</option>
-                <option value="false">Master Card</option>
-            </select>
+                @if (ViewBag.SelectedVisa == null)
+                {
+                    <option selected value="null">All Cards</option>
+                }
+                else
+                {
+                    <option value="null">All Cards</option>
+                }
 
+                @if (ViewBag.SelectedVisa == true)
+                {
+                    <option selected value="true">Visa</option>
+                }
+                else
+                {
+                    <option value="true">Visa</option>
+                }
+
+                @if (ViewBag.SelectedVisa == false)
+                {
+                    <option selected value="false">Master Card</option>
+                }
+                else
+                {
+                    <option value="false">MasterCard</option>
+                }
+            </select>
+        </div>
+        <div class="flex-container">
             <input class="submit" type="submit" value="Filter" />
         </div>
     }
-    <div class="flex-container">
-        @foreach (var card in Model)
+     <div class="flex-container">
+        @foreach (var card in Model) 
         {
-            <div class="card">
+            <div class="card" onclick="openModal('@card.FullName', '@card.CardNumber', '@card.ExpirationDate.ToString("MM/yyyy", CultureInfo.InvariantCulture)', '@card.cvv','@card.CardIssuanceDate.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)')">
                 <img class="logo" src="~/lib/images/icon.png" />
                 <h2>@card.FullName</h2>
                 <p class="card-number">
@@ -59,25 +115,35 @@
             </div>
         }
     </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-card-name"></h2>
+            <p id="modal-card-number"></p>
+            <p id="modal-card-expiration"></p>
+                <h2>More info:</h2>
+                <p id="hidden-card-production"></p>
+                <p id="hidden-card-cvv"></p>
+            </div>
+        </div>
+    
+
     <script>
-        function highlightText() {
-            var searchText = document.getElementById("searchText").value;
-            var cardProperties = document.querySelectorAll(".card *");
-
-            cardProperties.forEach(function (property) {
-                property.innerHTML = property.textContent;
-            });
-
-            cardProperties.forEach(function (property) {
-                var regex = new RegExp(searchText, "gi");
-                property.innerHTML = property.textContent.replace(regex, function (match) {
-                    return "<span class='highlight'>" + match + "</span>";
-                });
-            });
+        function openModal(name, number, expiration, cvv,production) {
+            document.getElementById("modal-card-name").innerText = name;
+            document.getElementById("modal-card-number").innerText = "Card Number: " + number;
+            document.getElementById("modal-card-expiration").innerText = "Expiration Date: " + expiration;
+            document.getElementById("hidden-card-production").innerText = "Date of production: " + production;
+            document.getElementById("hidden-card-cvv").innerText = "CVV: " +cvv;
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("hidden-card").style.display = "block";  
         }
 
-       
-        document.getElementById("searchText").addEventListener("input", highlightText);
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+            document.getElementById("hidden-card").style.display = "none"; 
+        }
     </script>
+    
 </body>
 </html>
