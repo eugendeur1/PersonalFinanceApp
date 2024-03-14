@@ -21,7 +21,11 @@
         <div class="select-container">
             <label for="year"></label>
             <select name="year" id="year" class="custom-select">
+
                 @if (ViewBag.SelectedYear == 0)
+
+                @if(ViewBag.SelectedYear == 0)
+
                 {
                     <option selected value="0">All Years</option>
                 }

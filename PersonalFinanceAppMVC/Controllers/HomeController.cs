@@ -47,6 +47,7 @@ namespace PersonalFinanceAppMVC.Controllers
                 ).ToList();
             }
 
+
             var filteredCards = allCardsFromDb.Where(card =>
                 (year == 0 || card.ExpirationDate.Year == year) &&
                 (!Visa.HasValue || card.Visa == Visa.Value)
@@ -55,6 +56,7 @@ namespace PersonalFinanceAppMVC.Controllers
             ViewBag.SelectedYear = year;
             ViewBag.SelectedVisa = Visa;
             ViewBag.SearchText = searchText;
+
 
             return View(filteredCards);
         }

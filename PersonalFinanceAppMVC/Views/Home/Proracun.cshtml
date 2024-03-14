@@ -74,7 +74,7 @@
             <button type="submit" class="Save">Save</button>
         </form>
     </div>
-    @*Nevidljivi dio koda koji se poziva kad ste stisne edit te izlazi kao popup.*@
+
     <div id="editModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -82,11 +82,11 @@
             <div class="form-container">
                 <form id="editForm" method="post" action="@Url.Action("Edit", "Home")">
                     <div class="form-group">
-                        <label for="budzet">Allowed Budget:</label>
+                        <label for="edit-budzet">Allowed Budget:</label>
                         <input type="text" id="edit-budzet" name="budzet">
                     </div>
                     <div class="form-group">
-                        <label for="month">Month:</label>
+                        <label for="edit-month">Month:</label>
                         <select id="edit-month" name="Month" required>
                             <option value="">-- Select Month --</option>
                             @foreach (var month in Enum.GetNames(typeof(Month)))
@@ -96,7 +96,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="department">Department:</label>
+                        <label for="edit-department">Department:</label>
                         <select id="edit-department" name="Department" required>
                             <option value="">-- Select Department --</option>
                             @foreach (var department in Enum.GetNames(typeof(Department)))
@@ -111,37 +111,37 @@
             </div>
         </div>
     </div>
+
     <script>
-        var editModal = document.getElementById('editModal');
+        document.addEventListener("DOMContentLoaded", function () {
+            var editModal = document.getElementById("editModal");
+            var closeBtn = editModal.querySelector(".close");
+            var editButtons = document.querySelectorAll('.edit-button');
 
-        var closeBtn = document.getElementsByClassName("close")[0];
+            function openEditModal(id) {
+                document.getElementById('edit-item-id').value = id;
+                editModal.style.display = "block";
+            }
 
-        var editButtons = document.querySelectorAll('.edit-button');
+            function closeEditModal() {
+                editModal.style.display = "none";
+            }
 
-        function openEditModal(id) {
-            document.getElementById('edit-item-id').value = id;
-            editModal.style.display = "block";
-        }
-
-        function closeEditModal() {
-            // Hide the modal
-            editModal.style.display = "none";
-        }
-
-        closeBtn.onclick = function () {
-            closeEditModal();
-        }
-
-        window.onclick = function (event) {
-            if (event.target == editModal) {
+            closeBtn.onclick = function () {
                 closeEditModal();
             }
-        }
 
-        editButtons.forEach(function (button) {
-            button.addEventListener('click', function () {
-                var itemId = this.getAttribute('data-id');
-                openEditModal(itemId);
+            window.onclick = function (event) {
+                if (event.target == editModal) {
+                    closeEditModal();
+                }
+            }
+
+            editButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var itemId = this.getAttribute('data-id');
+                    openEditModal(itemId);
+                });
             });
         });
     </script>
