@@ -64,7 +64,7 @@
 
             <label for="visa"></label>
             <select name="Visa" id="visa" class="custom-select">
-                @if (ViewBag.SelectedVisa == null)
+                @if(ViewBag.SelectedVisa == null)
                 {
                     <option selected value="null">All Cards</option>
                 }
@@ -73,7 +73,7 @@
                     <option value="null">All Cards</option>
                 }
 
-                @if (ViewBag.SelectedVisa == true)
+                @if(ViewBag.SelectedVisa == true)
                 {
                     <option selected value="true">Visa</option>
                 }
@@ -82,7 +82,7 @@
                     <option value="true">Visa</option>
                 }
 
-                @if (ViewBag.SelectedVisa == false)
+                @if(ViewBag.SelectedVisa == false)
                 {
                     <option selected value="false">Master Card</option>
                 }
@@ -121,33 +121,65 @@
     </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal('myModal')">&times;</span>
             <h2 id="modal-card-name"></h2>
             <p id="modal-card-number"></p>
             <p id="modal-card-expiration"></p>
-                <h2>More info:</h2>
-                <p id="hidden-card-production"></p>
-                <p id="hidden-card-cvv"></p>
+            <h2>More info:</h2>
+            <p id="hidden-card-production"></p>
+            <p id="hidden-card-cvv"></p>
+        </div>
+    </div>
+
+    <div class="modal fade" id="bootstrapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">More Info About Card</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal('bootstrapModal')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2 id="modal-card-name-bootstrap"></h2>
+                    <p id="modal-card-number-bootstrap"></p>
+                    <p id="modal-card-expiration-bootstrap"></p>
+                    <h2>More info:</h2>
+                    <p id="hidden-card-production-bootstrap"></p>
+                    <p id="hidden-card-cvv-bootstrap"></p>
+                </div>
             </div>
         </div>
-    
+    </div>
 
     <script>
-        function openModal(name, number, expiration, cvv,production) {
-            document.getElementById("modal-card-name").innerText = name;
-            document.getElementById("modal-card-number").innerText = "Card Number: " + number;
-            document.getElementById("modal-card-expiration").innerText = "Expiration Date: " + expiration;
-            document.getElementById("hidden-card-production").innerText = "Date of production: " + production;
-            document.getElementById("hidden-card-cvv").innerText = "CVV: " +cvv;
-            document.getElementById("myModal").style.display = "block";
-            document.getElementById("hidden-card").style.display = "block";  
+        function openModal(name, number, expiration, cvv, production) {
+            if (name === 'Eugen Deur' || name === 'Tomislav Tolj' || name === 'Luka Modrić') {
+                document.getElementById("modal-card-name").innerText = name;
+                document.getElementById("modal-card-number").innerText = "Card Number: " + number;
+                document.getElementById("modal-card-expiration").innerText = "Expiration Date: " + expiration;
+                document.getElementById("hidden-card-production").innerText = "Date of production: " + production;
+                document.getElementById("hidden-card-cvv").innerText = "CVV: " + cvv;
+                document.getElementById("myModal").style.display = "block";
+                document.getElementById("hidden-card").style.display = "block";
+            } else {
+                document.getElementById("modal-card-name-bootstrap").innerText = name;
+                document.getElementById("modal-card-number-bootstrap").innerText = "Card Number: " + number;
+                document.getElementById("modal-card-expiration-bootstrap").innerText = "Expiration Date: " + expiration;
+                document.getElementById("hidden-card-production-bootstrap").innerText = "Date of production: " + production;
+                document.getElementById("hidden-card-cvv-bootstrap").innerText = "CVV: " + cvv;
+
+                $('#bootstrapModal').modal('show');
+            }
         }
 
-        function closeModal() {
-            document.getElementById("myModal").style.display = "none";
-            document.getElementById("hidden-card").style.display = "none"; 
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.getElementById("hidden-card").style.display = "none";
         }
     </script>
+
+
     
 </body>
 </html>

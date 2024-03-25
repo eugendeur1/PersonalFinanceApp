@@ -1,5 +1,4 @@
 ﻿@model List<MyProracun>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,42 +37,11 @@
                             <button type="submit" class="button">Delete</button>
                         </form>
                     </td>
-                    <td><button class="button edit-button" data-id="@item.Id">Edit</button></td>
+                    <td><button class="button edit-button" data-id="@item.Id" data-budzet="@item.budzet" data-month="@item.Month" data-department="@item.Department">Edit</button></td>
                 </tr>
             }
         </tbody>
     </table>
-
-    <div class="form-container">
-        <h2>Add Proracun</h2>
-        <form id="proracunForm" method="post">
-            <div class="form-group">
-                <label for="budzet">Allowed Budget:</label>
-                <input type="text" id="budzet" name="budzet">
-            </div>
-            <div class="form-group">
-                <label for="month">Month:</label>
-                <select id="month" name="Month" required>
-                    <option value="">-- Select Month --</option>
-                    @foreach (var month in Enum.GetNames(typeof(Month)))
-                    {
-                        <option value="@month">@month</option>
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="department">Department:</label>
-                <select id="department" name="Department" required>
-                    <option value="">-- Select Department --</option>
-                    @foreach (var department in Enum.GetNames(typeof(Department)))
-                    {
-                        <option value="@department">@department</option>
-                    }
-                </select>
-            </div>
-            <button type="submit" class="Save">Save</button>
-        </form>
-    </div>
 
     <div id="editModal" class="modal">
         <div class="modal-content">
@@ -83,11 +51,11 @@
                 <form id="editForm" method="post" action="@Url.Action("Edit", "Home")">
                     <div class="form-group">
                         <label for="edit-budzet">Allowed Budget:</label>
-                        <input type="text" id="edit-budzet" name="budzet">
+                        <input type="text" id="edit-budzet" name="budzet" class="form-control" />
                     </div>
                     <div class="form-group">
                         <label for="edit-month">Month:</label>
-                        <select id="edit-month" name="Month" required>
+                        <select id="edit-month" name="Month" class="form-control" required>
                             <option value="">-- Select Month --</option>
                             @foreach (var month in Enum.GetNames(typeof(Month)))
                             {
@@ -97,7 +65,7 @@
                     </div>
                     <div class="form-group">
                         <label for="edit-department">Department:</label>
-                        <select id="edit-department" name="Department" required>
+                        <select id="edit-department" name="Department" class="form-control" required>
                             <option value="">-- Select Department --</option>
                             @foreach (var department in Enum.GetNames(typeof(Department)))
                             {
@@ -112,14 +80,47 @@
         </div>
     </div>
 
+    <div class="form-container">
+        <h2>Add Proracun</h2>
+        <form id="proracunForm" method="post" action="@Url.Action("Proracun", "Home")">
+            <div class="form-group">
+                <label for="budzet">Allowed Budget:</label>
+                <input type="text" id="budzet" name="budzet" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="month">Month:</label>
+                <select id="month" name="Month" class="form-control" required>
+                    <option value="">-- Select Month --</option>
+                    @foreach (var month in Enum.GetNames(typeof(Month)))
+                    {
+                        <option value="@month">@month</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" name="Department" class="form-control" required>
+                    <option value="">-- Select Department --</option>
+                    @foreach (var department in Enum.GetNames(typeof(Department)))
+                    {
+                        <option value="@department">@department</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="Save">Save</button>
+        </form>
+    </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var editModal = document.getElementById("editModal");
             var closeBtn = editModal.querySelector(".close");
             var editButtons = document.querySelectorAll('.edit-button');
 
-            function openEditModal(id) {
+            function openEditModal(id, budzet, month, department) {
                 document.getElementById('edit-item-id').value = id;
+                document.getElementById('edit-budzet').value = budzet;
+                document.getElementById('edit-month').value = month;
+                document.getElementById('edit-department').value = department;
                 editModal.style.display = "block";
             }
 
@@ -140,7 +141,10 @@
             editButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                     var itemId = this.getAttribute('data-id');
-                    openEditModal(itemId);
+                    var budzet = this.getAttribute('data-budzet');
+                    var month = this.getAttribute('data-month');
+                    var department = this.getAttribute('data-department');
+                    openEditModal(itemId, budzet, month, department);
                 });
             });
         });

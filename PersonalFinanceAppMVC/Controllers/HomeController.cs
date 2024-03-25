@@ -99,7 +99,7 @@ namespace PersonalFinanceAppMVC.Controllers
             
             if (!Regex.IsMatch(data.budzet, @"^[1-9][0-9]+$"))
             {
-                return RedirectToAction("Error", new { message = "Phone number must contain only numeric characters." });
+                return RedirectToAction("Error", new { message = "The input can only be positive number that cant start with 0" });
             }
             List<MyProracun> existingMonths = DbTables.Proracuni.ToList();
 
@@ -132,24 +132,45 @@ namespace PersonalFinanceAppMVC.Controllers
             }
             return RedirectToAction("Proracun");
         }
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == id);
-            return View(proracun);
+            if (proracun == null)
+            {
+                return RedirectToAction("Error", new { message = "Budget item not found." });
+            }
+            return View(proracun); // Prikazujemo view za uređivanje s postojećim proračunom
         }
 
         [HttpPost]
         public IActionResult Edit(MyProracun updatedProracun)
         {
-            var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == updatedProracun.Id);
-            if (proracun != null)
+            if (!Regex.IsMatch(updatedProracun.budzet, @"^[1-9][0-9]+$"))
             {
-                proracun.budzet = updatedProracun.budzet;
-                proracun.Month = updatedProracun.Month;
-                proracun.Department = updatedProracun.Department;
+                return RedirectToAction("Error", new { message = "Budget must be a positive integer." });
             }
+
+            var proracun = DbTables.Proracuni.FirstOrDefault(p => p.Id == updatedProracun.Id);
+            if (proracun == null)
+            {
+                return RedirectToAction("Error", new { message = "Budget item not found." });
+            }
+
+            var existingMonths = DbTables.Proracuni.Where(p => p.Month == updatedProracun.Month && p.Id != updatedProracun.Id).ToList();
+            if (existingMonths.Any())
+            {
+                return RedirectToAction("Error", new { message = "You cannot choose a month that is already taken." });
+            }
+
+            // Ažuriramo svojstva proračuna na temelju unesenih vrijednosti
+            proracun.budzet = updatedProracun.budzet;
+            proracun.Month = updatedProracun.Month;
+            proracun.Department = updatedProracun.Department;
+
             return RedirectToAction("Proracun");
         }
+    
         [HttpGet]
         public IActionResult Profil()
         {
